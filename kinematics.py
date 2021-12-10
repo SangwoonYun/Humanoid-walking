@@ -1,6 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#
+# kinematics.py
+#
+#  Created on: 2021. 12. 09.
+#      Author: Sangwoon Yun
+#
+
 import numpy as np
 import math
 
+from config import *
 from DHmatrix import DH
 
 class LEG(): 
@@ -9,10 +20,10 @@ class LEG():
         self.set_origin()
         self.H.append(DH( 0, 90,  0, 0)) # hip_yaw
         self.H.append(DH( 0,-90,  0, 0)) # hip_roll
-        self.H.append(DH( 0,  0, 74, 0)) # hip_pitch
-        self.H.append(DH( 0,  0, 77, 0)) # knee_pitch
+        self.H.append(DH( 0,  0, L3, 0)) # hip_pitch
+        self.H.append(DH( 0,  0, L4, 0)) # knee_pitch
         self.H.append(DH( 0, 90,  0, 0)) # ankle_pitch
-        self.H.append(DH( 0,  0, 33, 0)) # ankle_roll
+        self.H.append(DH( 0,  0, L6, 0)) # ankle_roll
         self.set_skiplate()
         self.fw_kinematics()
 

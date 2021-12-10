@@ -1,3 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#
+# zmp.py
+#
+#  Created on: 2021. 12. 10.
+#      Author: Sangwoon Yun
+#
+
 import numpy as np
 import math
 
