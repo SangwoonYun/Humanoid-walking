@@ -21,7 +21,7 @@ ADDR_MX_PRESENT_POSITION    = 36
 
 PROTOCOL_VERSION            = 1.0
 BAUDRATE                    = 1000000
-DEVICENAME                  = '/dev/ttyUSB0'
+DEVICENAME                  = '/dev/ttyUSB1'
 
 TORQUE_ENABLE               = 1
 TORQUE_DISABLE              = 0

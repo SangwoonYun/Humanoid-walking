@@ -31,7 +31,6 @@ from dynamixel_sdk import *
 
 class Dynamixel():
     def __init__(self):
-        self.DXL_ID = DXL_ID_L[0]    # test code
         self.portHandler = PortHandler(DEVICENAME)
         self.packetHandler = PacketHandler(PROTOCOL_VERSION)
         self.open_port()
@@ -89,27 +88,38 @@ class Dynamixel():
         else:
             print("[ID:%03d] has been successfully disconnected" % (DXL_ID))
 
-    def run(self):
+    def run(self):  # test code
         index = 0
-        dxl_goal_position = [30, 45, 60]
-        for idx, pos in enumerate(dxl_goal_position):
-            dxl_goal_position[idx] = int(self.angle2value(self.angle2real(pos)))
+        DXL_LIST = DXL_ID_L + DXL_ID_R
+        DXL_LIST.sort()
+        #dxl_goal_position = [30, 45, 60]
+        #for idx, pos in enumerate(dxl_goal_position):
+        #    dxl_goal_position[idx] = int(self.angle2value(self.angle2real(pos)))
+        dxl_goal_position = [[358, 666, 512, 512, 512, 512, 512, 512, 512, 512, 512, 512],  # 0
+                             [358, 666, 512, 512, 461, 563, 410, 615, 512, 512, 563, 461],  # 15
+                             [358, 666, 512, 512, 410, 614, 307, 717, 512, 512, 614, 410],  # 30
+                             [358, 666, 512, 512, 359, 665, 205, 819, 512, 512, 665, 359],  # 45
+                             [358, 666, 512, 512, 308, 716, 102, 922, 512, 512, 716, 308],  # 60
+                             [358, 666, 512, 512, 359, 665, 205, 819, 512, 512, 665, 359],  # 45
+                             [358, 666, 512, 512, 410, 614, 307, 717, 512, 512, 614, 410],  # 30
+                             [358, 666, 512, 512, 461, 563, 410, 615, 512, 512, 563, 461]]  # 15
         while 1:
             print("Press any key to continue! (or press ESC to quit!)")
             if getch() == chr(0x1b):
                 break
+            for idx, DXL_ID in enumerate(DXL_LIST):
 
-            self.write_position(self.DXL_ID, dxl_goal_position[index])
+                self.write_position(DXL_ID, dxl_goal_position[index][idx])
             
-            while 1:
-                dxl_present_position = self.read_position(self.DXL_ID)
-                print("[ID:%03d] GoalPos:%03d  PresPos:%03d" % (self.DXL_ID, dxl_goal_position[index], dxl_present_position))
-                if self.is_done(dxl_goal_position[index], dxl_present_position):
-                    if index == 2:
-                        index = 0
-                    else:
-                        index += 1
-                    break
+                '''while 1:
+                    dxl_present_position = self.read_position(DXL_ID)
+                    print("[ID:%03d] GoalPos:%03d  PresPos:%03d" % (DXL_ID, dxl_goal_position[index][idx], dxl_present_position))
+                    if self.is_done(dxl_goal_position[index][idx], dxl_present_position):
+                        break'''
+            if index == len(dxl_goal_position)-1:
+                index = 0
+            else:
+                index += 1
         self.terminate()
 
     def write_position(self, DXL_ID, dxl_goal_position):
@@ -120,7 +130,7 @@ class Dynamixel():
         if dxl_comm_result != COMM_SUCCESS:
             print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
         elif dxl_error != 0:
-            print("%s" % packetHandler.getRxPacketError(dxl_error))
+            print("%s" % self.packetHandler.getRxPacketError(dxl_error))
 
     def read_position(self, DXL_ID):
         dxl_present_position, dxl_comm_result, dxl_error = self.packetHandler.read2ByteTxRx(self.portHandler,
@@ -153,6 +163,6 @@ if __name__ == '__main__':
     test = Dynamixel()
     try:
         test.run()
-    except KeyboardInterrupt:
-        test.disable_dynamixel_torque()
-        test.close_port()
+    except Exception as e:
+        print(e)
+        test.terminate()
