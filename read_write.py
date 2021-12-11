@@ -131,7 +131,7 @@ while 1:
             print("%s" % packetHandler.getRxPacketError(dxl_error))
 
         print("[ID:%03d] GoalPos:%03d  PresPos:%03d" % (DXL_ID, dxl_goal_position[index], dxl_present_position))
-
+        
         if not abs(dxl_goal_position[index] - dxl_present_position) > DXL_MOVING_STATUS_THRESHOLD:
             break
 

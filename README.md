@@ -1,11 +1,12 @@
 # Humanoid-walking   
-   
+
+### 1. Dynamixel SDK with AX-12A   
 #### Dynamixel SDK Install   
    
 ```bash   
-git clone git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git   
-cd python/   
-sudo python3 setup.py install   
+git clone git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+cd DynamixelSDK/python/
+sudo python3 setup.py install
 ```   
    
 #### Dynamixel SDK Instruction   
@@ -27,3 +28,7 @@ DEVICENAME                = '/dev/ttyUSB0'  # line 62
 DXL_MINIMUM_POSITION_VALUE = 358            # line 67
 DXL_MAXIMUM_POSITION_VALUE = 440            # line 68
 ```   
+
+***   
+
+

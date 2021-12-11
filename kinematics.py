@@ -14,7 +14,7 @@ import math
 from config import *
 from DHmatrix import DH
 
-class LEG(): 
+class Leg(): 
     def __init__(self):
         self.H = []
         self.set_origin()
@@ -205,7 +205,7 @@ class LEG():
 
 if __name__ == "__main__":
     np.set_printoptions(precision=1, suppress=True)
-    leg_left = LEG()
+    leg_left = Leg()
     
     thetas = [-45, 30, -60, 90, -30, -30]
     print(["{0:0.2f}".format(i) for i in thetas])
