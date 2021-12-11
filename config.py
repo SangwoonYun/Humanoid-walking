@@ -27,8 +27,9 @@ TORQUE_ENABLE               = 1
 TORQUE_DISABLE              = 0
 DXL_MOVING_STATUS_THRESHOLD = 20
 
-DXL_ID_L   = [id for id in range(38, 49, 2)]
-DXL_ID_R   = [id for id in range(39, 50, 2)]
+DXL_ID_L   = [id for id in range(39, 50, 2)]
+DXL_ID_R   = [id for id in range(38, 49, 2)]
+
 ANGLELIMIT = 300
 VALUELIMIT = 1023
 ANGLEPVAL  = ANGLELIMIT/(VALUELIMIT+1)
