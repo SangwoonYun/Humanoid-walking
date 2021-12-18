@@ -8,6 +8,14 @@
 #      Author: Sangwoon Yun
 #
 
+# Humanoid parameters
+STEP   = 50
+STEP_H = 50
+BALEN  = 60
+WEIGHT = (  1,  -1,   1,   1,   1,  -1,  -1,   1,  -1,  -1,  -1,   1)
+BIAS   = (105, 195, 150, 150, 150, 150, 150, 150, 150, 150, 150, 150)
+DEFPOS = (3, 0, -160)
+
 # DH parameters
 L3 = 74
 L4 = 77
@@ -44,7 +52,6 @@ ANGLELIMIT = 300
 VALUELIMIT = 1023
 ANGLEPVAL  = ANGLELIMIT/(VALUELIMIT+1)
 VALUEPANG  = (VALUELIMIT+1)/ANGLELIMIT
-DEFANGLEL  = (195, 150, 150, 150, 150, 150)
-DEFANGLER  = (105, 150, 150, 150, 150, 150)
-
-
+DEFANGLE   = (0, 0, -30, 60, -30, 0)
+DEFANGLER  = (105, 150, 120,  90, 150, 180)
+DEFANGLEL  = (195, 150, 180, 210, 150, 120)

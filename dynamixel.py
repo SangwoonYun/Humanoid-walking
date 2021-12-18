@@ -42,6 +42,11 @@ class Dynamixel():
                                                      self.packetHandler,
                                                      ADDR_AX_MOVING_SPEED,
                                                      LEN_AX_MOVING_SPEED)
+        
+        self.groupSyncReadMoving    = GroupSyncRead(self.portHandler,
+                                                    self.packetHandler,
+                                                    ADDR_AX_IS_MOVING,
+                                                    LEN_AX_IS_MOVING)
         self.open_port()
         self.set_port_baudrate()
         self.DXL_ID_LIST = DXL_ID_L + DXL_ID_R
@@ -137,12 +142,25 @@ class Dynamixel():
         if dxl_addparam_result != True:
             print("[ID:%03d] groupSync addparam failed" % DXL_ID)
             quit()
+            
+    def sync_add_read(self, groupSync, DXL_ID):
+        dxl_addparam_result = groupSync.addParam(DXL_ID)
+        if dxl_addparam_result != True:
+            print("[ID:%03d] groupSync addparam failed" % DXL_ID)
+            quit()
 
     def sync_write_param(self, groupSync):
         dxl_comm_result = groupSync.txPacket()
         if dxl_comm_result != COMM_SUCCESS:
             print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
         groupSync.clearParam()
+        
+    def sync_read_param(self, groupSync):
+        dxl_comm_result, result = groupSync.rxPacket()
+        if dxl_comm_result != COMM_SUCCESS:
+            print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
+        groupSync.clearParam()
+        return result
 
     def to_byte_array(self, value):
         param_array = [DXL_LOBYTE(value),
@@ -169,6 +187,11 @@ class Dynamixel():
             elif dxl_is_moving == 1:
                 return 1
         return 0
+        '''for DXL_ID in self.DXL_ID_LIST:
+            self.sync_add_read(self.groupSyncReadMoving, DXL_ID)
+        dxl_is_moving = self.sync_read_param(self.groupSyncReadMoving)
+        print(dxl_is_moving)
+        return 0'''
 
     def angle2real(self, angle):
         rangle = angle + 150

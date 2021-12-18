@@ -148,7 +148,7 @@ class Leg():
             theta4 = math.acos(tempn / tempd)
         except ValueError:
             print('theta4 Error :', tempn, tempd)
-            theta4 = 0
+            theta4 = math.pi / 2
         return theta4
 
     def get_theta5(self):
@@ -207,7 +207,7 @@ if __name__ == "__main__":
     np.set_printoptions(precision=1, suppress=True)
     leg_left = Leg()
     
-    thetas = [-45, 30, -60, 90, -30, -30]
+    thetas = [0, 0, -30, 60, -30, 0]
     print(["{0:0.2f}".format(i) for i in thetas])
     leg_left.set_thetas(thetas)
     leg_left.fw_kinematics()
