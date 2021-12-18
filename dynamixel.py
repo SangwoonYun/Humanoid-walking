@@ -44,7 +44,9 @@ class Dynamixel():
                                                      LEN_AX_MOVING_SPEED)
         self.open_port()
         self.set_port_baudrate()
-        for DXL_ID in DXL_ID_L+DXL_ID_R:
+        self.DXL_ID_LIST = DXL_ID_L + DXL_ID_R
+        self.DXL_ID_LIST.sort()
+        for DXL_ID in self.DXL_ID_LIST:
             self.enable_dynamixel_torque(DXL_ID)
 
     def terminate(self):
@@ -152,6 +154,21 @@ class Dynamixel():
             return False
         else:
             return True
+        
+    def are_moving(self):
+        for DXL_ID in self.DXL_ID_LIST:
+            dxl_is_moving, dxl_comm_result, dxl_error = self.packetHandler.read1ByteTxRx(self.portHandler,
+                                                                                         DXL_ID,
+                                                                                         ADDR_AX_IS_MOVING)
+            if dxl_comm_result != COMM_SUCCESS:
+                print("%s" % self.packetHandler.getTxRxResult(dxl_comm_result))
+                return -1
+            elif dxl_error != 0:
+                print("%s" % self.packetHandler.getRxPacketError(dxl_error))
+                return -1
+            elif dxl_is_moving == 1:
+                return 1
+        return 0
 
     def angle2real(self, angle):
         rangle = angle + 150
