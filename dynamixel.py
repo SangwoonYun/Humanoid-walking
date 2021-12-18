@@ -143,8 +143,8 @@ class Dynamixel():
         groupSync.clearParam()
 
     def to_byte_array(self, value):
-        param_array = [DXL_LOBYTE(DXL_LOWORD(value)),
-                       DXL_HIBYTE(DXL_LOWORD(value))]
+        param_array = [DXL_LOBYTE(value),
+                       DXL_HIBYTE(value)]
         return param_array
 
     def is_done(self, dxl_goal_position, dxl_present_position):
@@ -165,7 +165,7 @@ class Dynamixel():
         index = 0
         DXL_LIST = DXL_ID_L + DXL_ID_R
         DXL_LIST.sort()
-        speed = 50
+        speed = 150
         for DXL in DXL_LIST:
             if DXL in (44, 45):
                 rspeed = speed * 2

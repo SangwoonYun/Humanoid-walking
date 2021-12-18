@@ -13,6 +13,10 @@ L3 = 74
 L4 = 77
 L6 = 33
 
+# T Scope
+T_F = 50 # T's Front mm
+T_R = 45 # T's Rear mm
+T_S = 30 # T's Side mm
 
 # Dynamixel SDK
 ADDR_AX_TORQUE_ENABLE       = 24
